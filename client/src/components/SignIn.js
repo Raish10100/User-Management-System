@@ -12,10 +12,10 @@ function SignIn() {
   
   async function handleSignIn(e) {
     e.preventDefault(); // event.preventDefault() method to prevent the default behavior of an HTML form submission
+    const loadingMessageId = toast.loading("Loading...")
     setLoading(true);
     try {
       console.log(credentials)
-      var loadingMessageId = toast.loading("Loading...")
       const response = await axios({
         method: "post", 
         url: URL + "/api/auth/signin",
