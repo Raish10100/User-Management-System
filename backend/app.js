@@ -6,7 +6,7 @@ const databaseconnect = require('./config/databaseConfig.js');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
-app.use(cors({ origin: [process.env.CLIENT_URL], credentials: true })); //Third-party middleware
+app.use(cors({ origin: ["https://user-management-system-awa2.onrender.com", "http://localhost:3000", "www.jwt-auth-api.raish.tech"], credentials: true })); //Third-party middleware
 
 // connect to db 
 databaseconnect();
