@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import toast from 'react-hot-toast'
 import axios from "axios";
 
 function SignIn() {
@@ -14,6 +15,7 @@ function SignIn() {
     setLoading(true);
     try {
       console.log(credentials)
+      var loadingMessageId = toast.loading("Loading...")
       const response = await axios({
         method: "post", 
         url: URL + "/api/auth/signin",
@@ -22,10 +24,12 @@ function SignIn() {
       });
       console.log(response)
       if (response?.data?.success) {
+        toast.dismiss(loadingMessageId)
         navigate("/");
       }
       setLoading(false);
     } catch (error) {
+      toast.dismiss(loadingMessageId)
       alert(error?.response?.data?.message);
       setLoading(false);
     }

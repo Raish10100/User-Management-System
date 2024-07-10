@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast'
 
 function Home() {
   const [loading, setLoading] = useState(false);
@@ -16,6 +17,7 @@ function Home() {
 
   async function getUser() {
     setLoading(true);
+    const loadingMessageId = toast.loading("Loading...")
     try {
       setLoading(false);
       const response = await axios({
@@ -23,12 +25,14 @@ function Home() {
         url: URL + "/api/auth/user",
         withCredentials: true
       });
-
+console.log(response)
       if (response.data.success) {
+        toast.dismiss(loadingMessageId)
         setUserData(response.data.data);
       }
       setLoading(false);
     } catch (error) {
+      toast.dismiss(loadingMessageId)
       navigate("/signin");
       setLoading(false);
     }
